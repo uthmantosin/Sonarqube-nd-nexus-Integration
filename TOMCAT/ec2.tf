@@ -2,8 +2,18 @@
 # configured aws provider with proper credentials
 provider "aws" {
   region    = "us-east-1"
-  profile   = "yusuf"
+  profile   = "MENWITHTASTE"
 }
+
+
+terraform {
+   backend "s3" {
+  bucket = "menwithtaste-jenkins"
+  profile   = "MENWITHTASTE"
+  key    = "JNST.tfstate"
+  region = "us-east-1"
+   }
+} 
 
 
 # create default vpc if one does not exit
@@ -90,7 +100,7 @@ resource "aws_instance" "ec2_instance" {
   instance_type          = "t2.small"
   subnet_id              = aws_default_subnet.default_az1.id
   vpc_security_group_ids = [aws_security_group.tomcat_ec2_security_group.id]
-  key_name               = "devopskeypair"
+  key_name               = "mwtKP"
    user_data = "${file("install_tomcat.sh")}"
 
   tags = {

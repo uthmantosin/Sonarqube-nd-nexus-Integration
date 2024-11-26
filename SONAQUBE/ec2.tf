@@ -1,8 +1,17 @@
 # configured aws provider with proper credentials
 provider "aws" {
   region    = "us-east-1"
-  profile   = "yusuf"
+  profile   = "MENWITHTASTE"
 }
+
+terraform {
+   backend "s3" {
+  bucket = "menwithtaste-jenkins"
+  profile   = "MENWITHTASTE"
+  key    = "JNST.tfstate"
+  region = "us-east-1"
+   }
+} 
 
 
 # create default vpc if one does not exit
